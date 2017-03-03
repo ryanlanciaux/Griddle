@@ -390,6 +390,29 @@ storiesOf('Cell', module)
   });
 
 storiesOf('Bug fixes', module)
+  .add('Add data', () => {
+    class FixContainer extends Component {
+      state = { data: fakeData.slice(0, 5)}
+
+      onClick = () => {
+        const data = this.state.data.concat(fakeData.slice(6, 7));
+        this.setState({ data });
+      }
+
+      render() {
+        return (
+          <div>
+            <button onClick={this.onClick} type='button'>Click</button>
+            <Griddle data={this.state.data} plugins={[LocalPlugin]} />
+          </div>
+        );
+      }
+    }
+
+    return (
+      <FixContainer />
+    );
+  })
   .add('Delete row', () => {
      const enhanceWithOnClick = onClick => class ComputeThing extends Component {
       static propTypes = {
